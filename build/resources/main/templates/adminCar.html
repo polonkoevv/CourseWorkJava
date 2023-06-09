@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+
+    <title>Title</title>
+</head>
+<style>
+    .navbar {
+        padding-left: 50px;
+    }
+
+    .man{
+        margin: 30px;
+    }
+</style>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="/">RideVibe</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" href="/">Home</a>
+            </li>
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Admin panel
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="/admin/users">Manage users</a>
+                    <a class="dropdown-item" href="/admin/cars">Manage cars</a>
+                    <a class="dropdown-item" href="/admin/booking">Manage booking</a>
+                </div>
+            </li>
+
+        </ul>
+    </div>
+</nav>
+
+
+<!--<form th:action="@{/admin/cars/add}" method="post">-->
+<!--  <label for="company">Username</label>-->
+<!--  <input name="company" type="text" placeholder="Company" id="company">-->
+
+<!--  <label for="name">Username</label>-->
+<!--  <input name="name" type="text" placeholder="Name" id="name">-->
+
+<!--  <label for="type">Username</label>-->
+<!--  <input name="type" type="text" placeholder="Type" id="type">-->
+
+<!--  <label for="price">Username</label>-->
+<!--  <input name="price" type="text" placeholder="Price" id="price">-->
+
+<!--  <button type="submit">Add</button>-->
+<!--</form>-->
+
+<form class="man" th:action="@{/admin/cars/add}" method="post" enctype="multipart/form-data">
+    <label for="company">Username</label>
+    <input name="company" type="text" placeholder="Company" id="company">
+
+    <label for="name">Username</label>
+    <input name="name" type="text" placeholder="Name" id="name">
+
+    <label for="type">Username</label>
+    <input name="type" type="text" placeholder="Type" id="type">
+
+    <label for="price">Username</label>
+    <input name="price" type="text" placeholder="Price" id="price">
+
+    <label for="imagename">Photo</label>
+    <input name="imagename" type="file" id="imagename">
+
+    <button type="submit">Add</button>
+</form>
+
+<form class="man" th:action="@{/admin/cars/delete}" method="post">
+    <label for="id">Username</label>
+    <input name="id" type="text" placeholder="User ID" id="id">
+
+    <button type="submit">Delete</button>
+</form>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Id</th>
+        <th scope="col">Company</th>
+        <th scope="col">Name</th>
+        <th scope="col">Type</th>
+        <th scope="col">Price</th>
+        <th scope="col">Delete</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <th:block th:each="car: ${carList}">
+
+            <tr>
+            <th scope="row">-</th>
+            <td>[[${car.getId()}]]</td>
+            <td>[[${car.getCompany()}]]</td>
+            <td>[[${car.getName()}]]</td>
+            <td>[[${car.getType()}]]</td>
+            <td>[[${car.getPrice()}]]</td>
+            <td>
+                <form action="/admin/cars/delete" method="post">
+                    <input style="display: none" type="text" name="id" th:value="${car.getId()}">
+                    <button type="submit">Delete</button>
+                </form>
+            </td>
+        </tr>
+    </th:block>
+    </tbody>
+</table>
+
+
+</body>
+
+</html>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
